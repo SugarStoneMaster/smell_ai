@@ -15,7 +15,7 @@ def project_report():
     #filter dataframe with only the columns we need
     df = df[['filename', 'name_smell', 'smell']]
     #cut first part of filename to get project name
-    df['project_name'] = df['filename'].str.split('\\').str[2]
+    df['project_name'] = df['filename'].str.extract(r'projects[\\/](.*?)[\\/]', expand=False)
     df = df[['project_name', 'smell']]
     # set dtype of smell as int
     df['smell'] = df['smell'].astype(int)

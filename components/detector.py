@@ -8,7 +8,7 @@ from cs_detector.code_extractor.models import load_model_dict, load_tensor_opera
 from cs_detector.code_extractor.dataframe_detector import load_dataframe_dict
 def rule_check(node, libraries, filename, df_output,models,output_path):
     #create dictionaries and libraries useful for detection
-    dataframe_path = os.path.abspath("../obj_dictionaries/dataframes.csv")
+    dataframe_path = os.path.abspath("obj_dictionaries/dataframes.csv")
     df_dict = load_dataframe_dict(dataframe_path)
     tensor_dict = load_tensor_operations_dict()
     #start detection

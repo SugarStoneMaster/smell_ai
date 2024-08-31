@@ -98,16 +98,16 @@ def projects_analysis(base_path='../input/projects', output_path='../output/proj
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     dirpath = os.listdir(base_path)
-    if not os.path.exists("../config/execution_log.txt"):
+    if not os.path.exists("./config/execution_log.txt"):
         #get abs path of execution_log.txt
-        execution_log_path = os.path.abspath("../config/execution_log.txt")
+        execution_log_path = os.path.abspath("./config/execution_log.txt")
         print("Path:"+execution_log_path)
-        open("../config/execution_log.txt", "w").close()
+        open("./config/execution_log.txt", "w").close()
         resume = False
-    execution_log = open("../config/execution_log.txt", "a")
+    execution_log = open("./config/execution_log.txt", "a")
     #get last project analyzed in execution_log.txt
     if resume:
-        with open("../config/execution_log.txt", "r") as f:
+        with open("./config/execution_log.txt", "r") as f:
             last_project = f.readlines()[-1]
     for dirname in dirpath:
         if resume:
