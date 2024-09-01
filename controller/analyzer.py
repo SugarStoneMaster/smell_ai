@@ -9,22 +9,23 @@ import shutil
 
 
 def temporal_results(output_path):
+    """
+    Creates or updates a .csv file named smell_count_dates, which contains
+    the number of total smells of the analysis and the datetime of the analysis
+    """
 
-    # Step 2: Read 'to_save.csv' and calculate the total number of smells
     df = pd.read_csv(output_path + "/to_save.csv")
 
-    # Ensure the file has the correct columns
+    # Ensure the file has the correct column
     if 'smell' not in df.columns:
         print("Error: 'to_save.csv' must contain a 'smell' column.")
         return
 
     total_smells = df['smell'].sum()
 
-    # Step 3: Prepare the new row with the current date and smell count
     current_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     new_row = {'smells': total_smells, 'date': current_date}
 
-    # Step 4: Check if smell_count_dates.csv exists, and create or append to it
     smell_count_dates_path = os.path.join(output_path, 'smell_count_dates.csv')
 
     if os.path.exists(smell_count_dates_path):
@@ -35,7 +36,6 @@ def temporal_results(output_path):
         # File does not exist, create a new DataFrame and save it
         smell_count_dates = pd.DataFrame([new_row])
 
-    # Write the updated DataFrame to the CSV file
     smell_count_dates.to_csv(smell_count_dates_path, index=False)
 
     print(f"Smell count recorded. Total smells: {total_smells}")
@@ -126,6 +126,7 @@ def analyze_project(project_path, output_path="."):
                 continue
 
     to_save.to_csv(output_path + "/to_save.csv", index=False, mode='a')
+
     temporal_results(output_path)
 
 

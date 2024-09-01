@@ -12,6 +12,11 @@ def label_threshold(pct, all_labels, threshold=10):
 
 
 def pie_or_bar_chart(input_file, is_pie):
+    """
+    Generate a pie or bar chart in which the frequencies for type of code smell are shown.
+    input_file should be a .csv with "name_smell" and "smell" columns, which are respectively
+    type of code smell and frequency.
+    """
     try:
         data = pd.read_csv(input_file)
     except FileNotFoundError:
@@ -36,7 +41,6 @@ def pie_or_bar_chart(input_file, is_pie):
         total = sum(frequencies)
         percentages = [(freq / total) * 100 for freq in frequencies]
 
-        # Pie chart
         plt.figure(figsize=(14, 8))
 
         # Custom labels based on threshold
