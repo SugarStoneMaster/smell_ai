@@ -4,6 +4,41 @@ from concurrent.futures import ThreadPoolExecutor
 import time
 from components import detector
 import argparse
+import datetime
+import shutil
+
+
+def temporal_results(output_path):
+
+    # Step 2: Read 'to_save.csv' and calculate the total number of smells
+    df = pd.read_csv(output_path + "/to_save.csv")
+
+    # Ensure the file has the correct columns
+    if 'smell' not in df.columns:
+        print("Error: 'to_save.csv' must contain a 'smell' column.")
+        return
+
+    total_smells = df['smell'].sum()
+
+    # Step 3: Prepare the new row with the current date and smell count
+    current_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    new_row = {'smells': total_smells, 'date': current_date}
+
+    # Step 4: Check if smell_count_dates.csv exists, and create or append to it
+    smell_count_dates_path = os.path.join(output_path, 'smell_count_dates.csv')
+
+    if os.path.exists(smell_count_dates_path):
+        # File exists, append the new row
+        smell_count_dates = pd.read_csv(smell_count_dates_path)
+        smell_count_dates.loc[len(smell_count_dates)] = new_row
+    else:
+        # File does not exist, create a new DataFrame and save it
+        smell_count_dates = pd.DataFrame([new_row])
+
+    # Write the updated DataFrame to the CSV file
+    smell_count_dates.to_csv(smell_count_dates_path, index=False)
+
+    print(f"Smell count recorded. Total smells: {total_smells}")
 
 
 def merge_results(input_dir="../output", output_dir="../general_output"):
@@ -91,6 +126,8 @@ def analyze_project(project_path, output_path="."):
                 continue
 
     to_save.to_csv(output_path + "/to_save.csv", index=False, mode='a')
+    temporal_results(output_path)
+
 
 
 def projects_analysis(base_path='../input/projects', output_path='../output/projects_analysis',resume=False):
@@ -153,6 +190,21 @@ def clean(output_path="../output/projects_analysis"):
             os.system(f"rm -r {output_path}")
 
 
+def clean_except_file(output_path, keep_file="smell_count_dates.csv"):
+    # Iterate through the contents of the directory
+    for filename in os.listdir(output_path):
+        file_path = os.path.join(output_path, filename)
+
+        # Check if the current item is the file to keep
+        if filename == keep_file:
+            continue
+
+        # Check if it's a directory or a file, and remove accordingly
+        if os.path.isdir(file_path):
+            shutil.rmtree(file_path)  # Remove directory and all its contents
+        else:
+            os.remove(file_path)  # Remove file
+
 
 def main(args):
     print(args.input)
@@ -161,7 +213,12 @@ def main(args):
     if args.input is None or args.output is None:
         print("Please specify input and output folders")
         exit(0)
-    resume = True
+
+    if not args.resume:
+        clean_except_file(args.output)
+
+    if not os.path.exists(args.output):
+        os.makedirs(args.output)
 
     multiple = args.multiple
     if multiple:
@@ -188,7 +245,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=str, help="Path to the output folder")
     parser.add_argument("--max_workers", type=int, default=5,help="Number of workers for parallel execution")
     parser.add_argument("--parallel",default=False, type=bool, help="Enable parallel execution")
-    parser.add_argument("--resume", default=False, type=bool, help="Continue previous execution")
+    parser.add_argument('--resume', action='store_true', help='Continue previous execution. Clears output folder if omitted')
     parser.add_argument("--multiple", default=False, type=bool, help="Enable multiple projects analysis")
     args = parser.parse_args()
     main(args)
