@@ -4,28 +4,48 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
 
-
 def temporal_chart(input_file):
     """
     Given a .csv file with smells and date columns, creates a temporal chart which
-    highlights the number of smells between different dates/executions
+    highlights the number of smells between different dates/executions.
     """
     df = pd.read_csv(input_file)
 
+    # Convert 'date' column to datetime
     df['date'] = pd.to_datetime(df['date'])
 
+    # Sort DataFrame by date
     df = df.sort_values('date')
 
-    plt.figure(figsize=(10, 6))
-    plt.plot(df['date'], df['smells'], marker='o', linestyle='-')
-    plt.title('Number of Smells Over Time')
-    plt.xlabel('Date')
-    plt.ylabel('Number of Smells')
+    # Reset index to use in plot
+    df.reset_index(drop=True, inplace=True)
 
-    plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
+    # Start the plot
+    fig, ax1 = plt.subplots(figsize=(10, 6))
 
-    plt.grid(True)
+    # Plot using the index for x-axis and smells for y-axis
+    ax1.plot(df.index + 1, df['smells'], marker='o', linestyle='-')  # adding 1 to start index from 1
+    ax1.set_title('Number of Smells Over Time')
+    ax1.set_xlabel('Execution Index')
+    ax1.set_ylabel('Number of Smells')
+    ax1.grid(True)
 
+    # Create secondary x-axis to show dates
+    ax2 = ax1.twiny()
+    ax2.set_xlabel('Date')
+
+    # Set x-ticks on secondary axis to match the primary axis
+    ax2.set_xlim(ax1.get_xlim())  # Ensure the x-limits are the same
+    ax2.set_xticks(ax1.get_xticks())  # Use the same x-ticks as ax1
+    # Convert index positions to dates and set them as labels on the secondary axis
+    tick_labels = [df['date'].iloc[int(tick) - 1].strftime('%Y-%m-%d') if tick <= len(df['date']) else '' for tick in
+                   ax1.get_xticks()]
+    ax2.set_xticklabels(tick_labels)
+
+    # Ensure y-axis has integer labels
+    ax1.yaxis.set_major_locator(MaxNLocator(integer=True))
+
+    # Show plot
     plt.show()
 
 
