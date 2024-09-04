@@ -1,4 +1,6 @@
 import argparse
+import sys
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
@@ -9,7 +11,18 @@ def temporal_chart(input_file):
     Given a .csv file with smells and date columns, creates a temporal chart which
     highlights the number of smells between different dates/executions.
     """
-    df = pd.read_csv(input_file)
+
+    try:
+        df = pd.read_csv(input_file)
+    except FileNotFoundError:
+        print(f"Error: File '{input_file}' not found.")
+        sys.exit(1)
+    except pd.errors.EmptyDataError:
+        print("Error: The input CSV file is empty.")
+        sys.exit(1)
+    except pd.errors.ParserError:
+        print("Error: The input file is not a valid CSV format.")
+        sys.exit(1)
 
     # Convert 'date' column to datetime
     df['date'] = pd.to_datetime(df['date'])

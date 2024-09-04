@@ -11,7 +11,7 @@ def label_threshold(pct, all_labels, threshold=10):
     return all_labels if pct > threshold else ''
 
 
-def pie_or_bar_chart(input_file, is_pie):
+def pie_or_bar_chart(input_file="./general_overview.csv", is_pie=False):
     """
     Generate a pie or bar chart in which the frequencies for type of code smell are shown.
     input_file should be a .csv with "name_smell" and "smell" columns, which are respectively
@@ -75,13 +75,12 @@ def pie_or_bar_chart(input_file, is_pie):
 def main():
     parser = argparse.ArgumentParser(
         description="Generate a chart (pie or bar) based on code smell data in a CSV file.")
-    parser.add_argument('--input', type=str, required=True, help='Path to the input .csv file')
     parser.add_argument('--pie', action='store_true',
                         help='Flag to generate a pie chart. Generates a bar chart if omitted.')
 
     args = parser.parse_args()
 
-    pie_or_bar_chart(args.input, args.pie)
+    pie_or_bar_chart(is_pie=args.pie)
 
 
 if __name__ == '__main__':

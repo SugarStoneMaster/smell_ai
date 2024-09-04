@@ -227,11 +227,11 @@ def main(args):
             resume = False
             clean(args.output)
         if args.parallel:
-            parallel_projects_analysis(args.input, args.output, args.max_workers,resume)
+            parallel_projects_analysis(args.input, args.output, args.max_workers,args.resume)
         else:
             if not os.path.exists(f"{args.output}"):
                 os.makedirs(f"{args.output}")
-            projects_analysis(args.input, args.output,resume)
+            projects_analysis(args.input, args.output, args.resume)
     else:
 
         analyze_project(args.input, args.output)
@@ -245,9 +245,9 @@ if __name__ == "__main__":
     parser.add_argument("--input", type=str, help="Path to the input folder")
     parser.add_argument("--output", type=str, help="Path to the output folder")
     parser.add_argument("--max_workers", type=int, default=5,help="Number of workers for parallel execution")
-    parser.add_argument("--parallel",default=False, type=bool, help="Enable parallel execution")
+    parser.add_argument('--parallel', action='store_true', help='Enable parallel execution')
     parser.add_argument('--resume', action='store_true', help='Continue previous execution. Clears output folder if omitted')
-    parser.add_argument("--multiple", default=False, type=bool, help="Enable multiple projects analysis")
+    parser.add_argument('--multiple', action='store_true', help='Enable multiple projects analysis')
     args = parser.parse_args()
     main(args)
 
