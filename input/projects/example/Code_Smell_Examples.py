@@ -3,6 +3,15 @@ import numpy as np
 import tensorflow as tf
 import torch
 import torch.nn.functional as F
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from xgboost import XGBClassifier
+from keras.models import Sequential
+from keras.layers import Dense
+
+
+
 
 '''
 def chain_index_example():
@@ -200,3 +209,29 @@ def pandas_lib_check():
     z = x.concat(y)
     c = x["ciao"]
     d = x["ciao"].values
+
+
+def train_model(X, y):
+    model = LogisticRegression()  # Missing hyperparameters like 'solver', 'C'
+    model.fit(X, y)
+
+def train_forest(X, y):
+    model = RandomForestClassifier()  # Missing hyperparameters like 'n_estimators', 'max_depth'
+    model.fit(X, y)
+
+
+def train_knn(X, y):
+    model = KNeighborsClassifier()  # Missing hyperparameters like 'n_neighbors', 'weights'
+    model.fit(X, y)
+
+
+def train_xgb(X, y):
+    model = XGBClassifier(random_state=1, max_depth=10)  # Missing hyperparameters like 'learning_rate', 'n_estimators'
+    model.fit(X, y)
+
+
+def train_sequential(X, y):
+    model = Sequential(loss="binary_crossentropy", metrics=["accuracy"], optimizer="adam")
+    model.add(Dense(64, activation='relu'))
+    model.compile(optimizer='adam', loss='categorical_crossentropy')
+    model.fit(X, y, epochs=10)

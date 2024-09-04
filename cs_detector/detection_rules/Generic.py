@@ -354,6 +354,69 @@ def hyperparameters_not_explicitly_set(libraries, filename, fun_node, model_dict
     return [], []
 
 
+def hyperparameters_randomness_not_explicitly_set(libraries, filename, fun_node, model_dict):
+    if [x for x in libraries if x in test_libraries]:
+        return [], []
+
+    model_libs = []
+    smell_instance_list = []
+    method_name = ''
+    dict_libs = set(model_dict['library'])
+
+    for lib in dict_libs:
+        if [x for x in libraries if lib in x]:
+            model_libs.append(lib)
+
+    hyperparameters_not_explicitly_set = 0
+
+    for node in ast.walk(fun_node):
+        if isinstance(node, ast.Call):
+            while isinstance(node.func, ast.Call):
+                node = node.func
+
+            model_defined = False
+            if isinstance(node.func, ast.Attribute):
+                method_name = node.func.attr + str('()')
+            elif hasattr(node.func, "id"):
+                method_name = node.func.id + str('()')
+
+            if check_model_method(method_name, model_dict, model_libs):
+                model_defined = True
+
+            if model_defined:
+                # Find the hyperparameters required for the model from model_dict
+                model_index = model_dict['method'].index(method_name)
+                required_hyperparameters = model_dict['hyperparameters'][model_index].split(",")
+
+                # Get the provided argument names from the node
+                provided_hyperparameters = [kw.arg for kw in node.keywords if hasattr(kw, 'arg')]
+
+                missing_hyperparameters = [param.strip() for param in required_hyperparameters if
+                                           param.strip() not in provided_hyperparameters]
+
+                if missing_hyperparameters:
+                    missing_params_str = ", ".join(missing_hyperparameters)
+                    fix_message = f"Hyperparameters not explicitly set. Missing parameters: {missing_params_str}."
+                    if 'random_state' in missing_hyperparameters or 'random_seed' in missing_hyperparameters:
+                        fix_message += " Warning: Randomness is uncontrolled due to missing random_state or random_seed."
+
+                    new_smell = {
+                        'filename': filename,
+                        'function_name': fun_node.name,
+                        'smell_name': 'hyperparameters_not_explicitly_set',
+                        'line': node.lineno,
+                    }
+                    smell_instance_list.append(new_smell)
+                    hyperparameters_not_explicitly_set += 1
+
+    if hyperparameters_not_explicitly_set > 0:
+        to_return = [filename, fun_node.name, hyperparameters_not_explicitly_set, "hyperparameters_not_explicitly_set",
+                     fix_message]
+        return to_return, smell_instance_list
+
+    return [], []
+
+
 def unnecessary_iteration(libraries, filename, fun_node, df_dict):
     function_name = ''
     if [x for x in libraries if 'pandas' in x]:

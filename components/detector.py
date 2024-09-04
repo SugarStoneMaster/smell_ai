@@ -6,6 +6,8 @@ from cs_detector.detection_rules.Generic import *
 from cs_detector.detection_rules.APISpecific import *
 from cs_detector.code_extractor.models import load_model_dict, load_tensor_operations_dict
 from cs_detector.code_extractor.dataframe_detector import load_dataframe_dict
+
+
 def rule_check(node, libraries, filename, df_output,models,output_path):
     #create dictionaries and libraries useful for detection
     dataframe_path = os.path.abspath("obj_dictionaries/dataframes.csv")
@@ -26,7 +28,7 @@ def rule_check(node, libraries, filename, df_output,models,output_path):
     tensor, tensor_list = tensor_array_not_used(libraries, filename, node)
     pytorch, pytorch_list = pytorch_call_method_misused(libraries, filename, node)
     unnecessary_iterations, unnecessary_iterations_list = unnecessary_iteration(libraries, filename, node, df_dict)
- #   hyper_parameters = hyperparameters_not_explicitly_set(libraries, filename, node,models)
+    hyper_parameters, hyper_parameters_list = hyperparameters_randomness_not_explicitly_set(libraries, filename, node,models)
     broadcasting_not_used,broadcasting_not_used_list = broadcasting_feature_not_used(libraries, filename, node,tensor_dict)
     if deterministic:
         df_output.loc[len(df_output)] = deterministic
@@ -73,8 +75,10 @@ def rule_check(node, libraries, filename, df_output,models,output_path):
     if broadcasting_not_used:
         df_output.loc[len(df_output)] = broadcasting_not_used
         save_single_file(filename, broadcasting_not_used_list,output_path)
- #   if hyper_parameters:
-  #      df_output.loc[len(df_output)] = hyper_parameters
+    if hyper_parameters:
+        df_output.loc[len(df_output)] = hyper_parameters
+        save_single_file(filename, hyper_parameters_list,output_path)
+
     return df_output
 def save_single_file(filename, smell_list,output_path):
     cols = ["filename", "function_name", "smell_name", "line"]
