@@ -1,0 +1,415 @@
+
+Test Case 1  		<error>
+   Contenuto Input :  Non contiene files python
+
+
+Test Case 2  		<error>
+   Contenuto Input :  Il path non esiste
+
+
+Test Case 3  		<error>
+   Contenuto Input :  Contiene solo files di test python
+
+
+Test Case 4  		<error>
+   Contenuto Input :  Il path esiste ma non ci sono files
+
+
+Test Case 5  		<error>
+   Contenuto Input :  Il path non è una cartella
+
+
+Test Case 6  		<error>
+   Esistenza output :  Contiene una cartella esistente ma non scrivibile
+
+
+Test Case 7  		<error>
+   Esistenza output :  Contiene una cartella non esistente
+
+
+Test Case 8  		<error>
+   Esistenza output :  Contiene un file
+
+
+Test Case 9  		<error>  (follows [if])
+   Esistenza Execution Log :  L’execution_log non esiste
+
+
+Test Case 10 		<error>  (follows [if])
+   Numero Threads :  0
+
+
+Test Case 11 		(Key = 1.1.1.1.1.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  1 <= files python <= 10
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati in maniera parallela
+
+
+Test Case 12 		(Key = 1.1.1.1.1.2.0.3.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  1 <= files python <= 10
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  1 <= NT <= 10
+OUTPUT: I report del singolo progetto vengono generati in maniera parallela
+
+
+
+Test Case 13 		(Key = 1.1.1.1.1.2.0.4.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  1 <= files python <= 10
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  > 10
+OUTPUT: I report del singolo progetto vengono generati in maniera parallela
+
+
+Test Case 14 		(Key = 1.1.1.1.2.1.1.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  1 <= files python <= 10
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  True
+   Esistenza Execution Log :  L’execution_log esiste
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati in maniera sequenziale controllando l'execution_log
+
+
+Test Case 15 		(Key = 1.1.1.1.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  1 <= files python <= 10
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati in maniera sequenziale
+
+
+
+Test Case 16 		(Key = 1.1.1.2.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  1 <= files python <= 10
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  False
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati 
+
+
+Test Case 17 		(Key = 1.2.1.1.1.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  11 <= files python <= 50
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati in maniera parallela
+
+
+Test Case 18 		(Key = 1.2.1.1.1.2.0.3.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  11 <= files python <= 50
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  1 <= NT <= 10
+OUTPUT: I report del singolo progetto vengono generati in maniera parallela
+
+
+Test Case 19 		(Key = 1.2.1.1.1.2.0.4.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  11 <= files python <= 50
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  > 10
+OUTPUT: I report del singolo progetto vengono generati in maniera parallela
+
+
+Test Case 20 		(Key = 1.2.1.1.2.1.1.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  11 <= files python <= 50
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  True
+   Esistenza Execution Log :  L’execution_log esiste
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati in maniera sequenziale controllando l'execution_log
+
+
+Test Case 21 		(Key = 1.2.1.1.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  11 <= files python <= 50
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati in maniera sequenziale 
+
+
+Test Case 22 		(Key = 1.2.1.2.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  11 <= files python <= 50
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  False
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati 
+
+
+
+Test Case 23 		(Key = 1.3.1.1.1.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  files python >= 51
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati in maniera parallela 
+
+
+
+Test Case 24 		(Key = 1.3.1.1.1.2.0.3.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  files python >= 51
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  1 <= NT <= 10
+OUTPUT: I report del singolo progetto vengono generati in maniera parallela 
+
+
+Test Case 25 		(Key = 1.3.1.1.1.2.0.4.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  files python >= 51
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  > 10
+OUTPUT: I report del singolo progetto vengono generati in maniera parallela 
+
+
+
+Test Case 26 		(Key = 1.3.1.1.2.1.1.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  files python >= 51
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  True
+   Esistenza Execution Log :  L’execution_log esiste
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati in maniera sequenziale controllando l'execution_log
+
+
+
+Test Case 27 		(Key = 1.3.1.1.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  files python >= 51
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati in maniera sequenziale 
+
+
+
+Test Case 28 		(Key = 1.3.1.2.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con un singolo progetto python
+   Size progetto           :  files python >= 51
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  False
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report del singolo progetto vengono generati
+
+
+Test Case 29 		(Key = 2.0.1.1.1.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (2<=N<=10)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report dei progetti vengono generati in maniera parallela 
+
+
+
+Test Case 30 		(Key = 2.0.1.1.1.2.0.3.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (2<=N<=10)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  1 <= NT <= 10
+OUTPUT: I report dei progetti vengono generati in maniera parallela 
+
+
+
+Test Case 31 		(Key = 2.0.1.1.1.2.0.4.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (2<=N<=10)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  > 10
+OUTPUT: I report dei progetti vengono generati in maniera parallela 
+
+
+
+Test Case 32 		(Key = 2.0.1.1.2.1.1.1.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (2<=N<=10)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  True
+   Esistenza Execution Log :  L’execution_log esiste
+   Numero Threads          :  Non selezionato
+OUTPUT: I report dei progetti vengono generati in maniera sequenziale controllando l'execution_log 
+
+
+
+Test Case 33 		(Key = 2.0.1.1.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (2<=N<=10)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report dei progetti vengono generati in maniera sequenziale 
+
+
+
+Test Case 34 		(Key = 2.0.1.2.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (2<=N<=10)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  False
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report dei progetti vengono generati e aggregati tra loro 
+
+
+Test Case 35 		(Key = 3.0.1.1.1.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (N>=11)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report dei progetti vengono generati in maniera parallela 
+
+
+
+Test Case 36 		(Key = 3.0.1.1.1.2.0.3.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (N>=11)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  1 <= NT <= 10
+OUTPUT: I report dei progetti vengono generati in maniera parallela 
+
+
+Test Case 37 		(Key = 3.0.1.1.1.2.0.4.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (N>=11)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  True
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  > 10
+OUTPUT: I report dei progetti vengono generati in maniera parallela 
+
+
+Test Case 38 		(Key = 3.0.1.1.2.1.1.1.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (N>=11)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  True
+   Esistenza Execution Log :  L’execution_log esiste
+   Numero Threads          :  Non selezionato
+OUTPUT: I report dei progetti vengono generati in maniera sequenziale controllando l'execution_log 
+
+
+
+Test Case 39 		(Key = 3.0.1.1.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (N>=11)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  True
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report dei progetti vengono generati in maniera sequenziale 
+
+
+Test Case 40 		(Key = 3.0.1.2.2.2.0.1.)
+   Contenuto Input         :  Contiene una cartella con molteplici progetti python (N>=11)
+   Size progetto           :  <n/a>
+   Esistenza output        :  Contiene una cartella esistente e scrivibile
+   Flag multiple           :  False
+   Flag parallel           :  False
+   Flag resume             :  False
+   Esistenza Execution Log :  <n/a>
+   Numero Threads          :  Non selezionato
+OUTPUT: I report dei progetti vengono generati e aggregati tra loro 
+
+
