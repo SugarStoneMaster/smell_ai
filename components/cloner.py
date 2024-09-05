@@ -25,8 +25,8 @@ def filter_repos(df,stars=200, commits=100):
 def debug_filter_repo(df):
     #for first selection tries and setup the experiment, we try to select only projects that have a low size
     #to avoid downloading a lot of data
-    df = df[df["Lines of Code"] < 10000]
-    df = df.head(10)
+    df = df[df["Lines of Code"] < 15000]
+    df = df.head(30)
     return df
 
 def get_debug_projects():
@@ -61,7 +61,7 @@ def setup():
 if __name__ == "__main__":
     clean()
     setup()
-    get_projects()
+    get_debug_projects()
 
 
 
