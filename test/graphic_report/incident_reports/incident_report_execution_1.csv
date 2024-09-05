@@ -1,0 +1,8 @@
+Timestamp,Test Case ID,Outcome,Message
+2024-09-05 15:24:43.920993,TC_3.1,Passed,
+2024-09-05 15:24:44.597969,TC_3.2,Passed,
+2024-09-05 15:24:45.057536,TC_3.4,Failed,Expected: Error: Columns datatypes not correct. Got: 
+2024-09-05 15:24:45.502349,TC_3.5,Passed,
+2024-09-05 15:24:45.949495,TC_3.6,Passed,
+2024-09-05 15:24:46.440913,TC_3.7,Failed,Expected: Error: The input file is not a valid CSV format.. Got: 
+2024-09-05 15:24:47.046751,TC_3.8,Passed,

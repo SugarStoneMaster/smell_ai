@@ -1,8 +1,11 @@
 import subprocess
 import os
+import csv
+from datetime import datetime
 
 graphic_report_path = "../../general_output/graphic_report.py"
 test_folder = "./test_cases/"
+output_folder = "./incident_reports/"
 
 # Test case paths and expected outcomes
 test_cases = [
@@ -32,12 +35,13 @@ test_cases = [
 ]
 
 
-def run_test_case(test_case):
+def run_test_case(test_case, writer):
     csv_file = os.path.join(test_folder, test_case["csv_file"])
 
-    if not os.path.exists(csv_file) and test_case[
-        "id"] != "TC_3.8":  # Ensure the test files exist, except for TC_3.8 (file doesn't exist case)
-        print(f"Test case {test_case['id']} failed: file {test_case['csv_file']} not found.")
+    if not os.path.exists(csv_file) and test_case["id"] != "TC_3.8":
+        message = f"File {test_case['csv_file']} not found."
+        writer.writerow([datetime.now(), test_case["id"], "Failed", message])
+        print(f"Test case {test_case['id']} failed: {message}")
         return
 
     try:
@@ -50,16 +54,34 @@ def run_test_case(test_case):
         result = subprocess.run(command, capture_output=True, text=True)
 
         if test_case["expected"] in result.stdout:
+            writer.writerow([datetime.now(), test_case["id"], "Passed", ""])
             print(f"Test case {test_case['id']} passed.")
         else:
-            print(f"\033[91mTest case {test_case['id']} failed. Expected: {test_case['expected']}. Got: {result.stdout}\033[0m")
+            message = f"Expected: {test_case['expected']}. Got: {result.stdout.strip()}"
+            writer.writerow([datetime.now(), test_case["id"], "Failed", message])
+            print(f"\033[91mTest case {test_case['id']} failed. {message}\033[0m")
+
     except Exception as e:
+        message = f"Error running test case {test_case['id']}: {e}"
+        writer.writerow([datetime.now(), test_case["id"], "Failed", message])
         print(f"Error running test case {test_case['id']}: {e}")
 
-
 def main():
-    for test_case in test_cases:
-        run_test_case(test_case)
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    execution_count = len(os.listdir(output_folder)) + 1
+    incident_report_path = os.path.join(output_folder, f"incident_report_execution_{execution_count}.csv")
+
+    # Create a new file for this execution
+    with open(incident_report_path, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        # Write header row
+        writer.writerow(["Timestamp", "Test Case ID", "Outcome", "Message"])
+
+        # Run each test case and log the result
+        for test_case in test_cases:
+            run_test_case(test_case, writer)
 
 
 if __name__ == '__main__':

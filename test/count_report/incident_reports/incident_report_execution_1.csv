@@ -1,0 +1,7 @@
+Timestamp,Test Case ID,Outcome,Message
+2024-09-05 15:25:00.717220,TC_2.1,Passed,
+2024-09-05 15:25:01.047419,TC_2.2,Failed,Expected: Error: Columns datatypes not correct. Got: 
+2024-09-05 15:25:01.370750,TC_2.3,Failed,"Expected: Error: CSV file must contain 'filename', 'name_smell' and 'smell' columns.. Got: "
+2024-09-05 15:25:01.684496,TC_2.4,Failed,Expected: Error: The input CSV file is empty.. Got: 
+2024-09-05 15:25:01.992517,TC_2.5,Failed,Expected: Error: The input file is not a valid CSV format.. Got: 
+2024-09-05 15:25:02.309130,TC_2.6,Failed,Expected: Error: File './test_cases/non_existent_file.csv' not found.. Got: 

@@ -1,0 +1,7 @@
+Timestamp,Test Case ID,Outcome,Message
+2024-09-05 15:24:19.740318,TC_4.1,Passed,
+2024-09-05 15:24:20.349815,TC_4.2,Failed,Expected: Error: Columns datatype not correct. Got: Temporal chart generated
+2024-09-05 15:24:20.801322,TC_4.3,Failed,Expected: Error: CSV file must contain 'smells' and 'date' columns.. Got: 
+2024-09-05 15:24:21.249272,TC_4.4,Passed,
+2024-09-05 15:24:21.692600,TC_4.5,Failed,Expected: Error: The input file is not a valid CSV format.. Got: 
+2024-09-05 15:24:22.135512,TC_4.6,Passed,
