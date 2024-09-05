@@ -1,7 +1,6 @@
 import unittest
 import ast
 
-# The function to be tested
 from cs_detector.detection_rules.Generic import deterministic_algorithm_option_not_used
 
 class TestDeterministicAlgorithmOption(unittest.TestCase):
@@ -20,10 +19,8 @@ def train_model():
         tree = ast.parse(source_code)
         fun_node = tree.body[0]
 
-        # Call the function to test
         result, smells = deterministic_algorithm_option_not_used(self.libraries, self.filename, fun_node)
 
-        # Expect one smell to be found
         self.assertEqual(len(smells), 1)
         self.assertIn("deterministic_algorithm_option_not_used", result)
 
@@ -36,10 +33,8 @@ def train_model():
         tree = ast.parse(source_code)
         fun_node = tree.body[0]
 
-        # Call the function to test
         result, smells = deterministic_algorithm_option_not_used(self.libraries, self.filename, fun_node)
 
-        # Expect no smell to be found
         self.assertEqual(len(smells), 0)
         self.assertFalse(result)
 
@@ -52,10 +47,8 @@ def train_model():
         tree = ast.parse(source_code)
         fun_node = tree.body[0]
 
-        # Call the function to test
         result, smells = deterministic_algorithm_option_not_used(self.libraries, self.filename, fun_node)
 
-        # Expect no smell to be found, since the option was set to False
         self.assertEqual(len(smells), 0)
         self.assertFalse(result)
 
@@ -68,10 +61,8 @@ def train_model():
         tree = ast.parse(source_code)
         fun_node = tree.body[0]
 
-        # Call the function to test
         result, smells = deterministic_algorithm_option_not_used(self.libraries, self.filename, fun_node)
 
-        # Expect no smell to be found
         self.assertEqual(len(smells), 0)
         self.assertFalse(result)
 

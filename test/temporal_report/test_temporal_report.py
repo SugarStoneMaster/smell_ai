@@ -7,7 +7,6 @@ temporal_report_path = "../../general_output/temporal_report.py"
 test_folder = "./test_cases/"
 output_folder = "./incident_reports/"
 
-# Test case paths and expected outcomes
 test_cases = [
     # TC_4.1: Correct smell_count_dates.csv
     {"id": "TC_4.1", "csv_file": "smell_count_dates_valid.csv", "expected": "Temporal chart generated"},
@@ -63,13 +62,10 @@ def main():
     execution_count = len(os.listdir(output_folder)) + 1
     incident_report_path = os.path.join(output_folder, f"incident_report_execution_{execution_count}.csv")
 
-    # Create a new file for this execution
     with open(incident_report_path, mode='w', newline='') as file:
         writer = csv.writer(file)
-        # Write header row
         writer.writerow(["Timestamp", "Test Case ID", "Outcome", "Message"])
 
-        # Run each test case and log the result
         for test_case in test_cases:
             run_test_case(test_case, writer)
 

@@ -1,7 +1,6 @@
 import unittest
 import ast
 
-# Assuming recursive_search_variables is imported from the module
 from cs_detector.code_extractor.dataframe_detector import recursive_search_variables, load_dataframe_dict
 
 df_dict = load_dataframe_dict("../../../obj_dictionaries/dataframes.csv")
@@ -22,10 +21,8 @@ def process_data():
         tree = ast.parse(source_code)
         fun_node = tree.body[0]
 
-        # Starting list with 'df' because it's the initial dataframe
         result = recursive_search_variables(fun_node, ['df'], df_dict)
 
-        # Expected to return both 'df' and 'new_df' since they are assigned the dataframe
         self.assertIn('df', result)
         self.assertIn('new_df', result)
 
@@ -39,10 +36,8 @@ def process_data():
         tree = ast.parse(source_code)
         fun_node = tree.body[0]
 
-        # Starting with 'df' (dataframe read by read_csv)
         result = recursive_search_variables(fun_node, ['df'], df_dict)
 
-        # Expected to return 'df' and 'merged_df'
         self.assertIn('df', result)
         self.assertIn('merged_df', result)
 
@@ -56,7 +51,6 @@ def process_data():
         tree = ast.parse(source_code)
         fun_node = tree.body[0]
 
-        # No dataframe expected
         result = recursive_search_variables(fun_node, [], df_dict)
         self.assertEqual(result, [])
 
@@ -70,10 +64,8 @@ def process_data():
         tree = ast.parse(source_code)
         fun_node = tree.body[0]
 
-        # Starting with 'df' (dataframe read by read_csv)
         result = recursive_search_variables(fun_node, ['df'], df_dict)
 
-        # Expected to include 'selected_df' since it selects from df
         self.assertIn('selected_df', result)
         self.assertIn('df', result)
 
@@ -88,10 +80,8 @@ def process_data():
         tree = ast.parse(source_code)
         fun_node = tree.body[0]
 
-        # Starting with 'df' (dataframe read by read_csv)
         result = recursive_search_variables(fun_node, ['df'], df_dict)
 
-        # Expected to return 'df', 'grouped_df', and 'result_df'
         self.assertIn('df', result)
         self.assertIn('grouped_df', result)
         self.assertIn('result_df', result)

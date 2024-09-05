@@ -1,7 +1,6 @@
 import unittest
 import ast
 
-# Assuming dataframe_check and search_pandas_library are imported from your module
 from cs_detector.code_extractor.dataframe_detector import dataframe_check, load_dataframe_dict
 
 df_dict = load_dataframe_dict("../../../obj_dictionaries/dataframes.csv")
@@ -24,7 +23,6 @@ def process_data():
 
         result = dataframe_check(fun_node, self.libraries, df_dict)
 
-        # Expected result should include 'df' and 'new_df'
         self.assertIn('df', result)
         self.assertIn('new_df', result)
 
@@ -40,7 +38,6 @@ def process_data():
 
         result = dataframe_check(fun_node, self.libraries, df_dict)
 
-        # Expected result should include 'df' and 'result_df'
         self.assertIn('df', result)
         self.assertIn('result_df', result)
 
@@ -56,7 +53,6 @@ def process_data():
 
         result = dataframe_check(fun_node, self.libraries, df_dict)
 
-        # Expected result should include 'df' and 'selected_df'
         self.assertIn('df', result)
         self.assertIn('selected_df', result)
 
@@ -71,7 +67,6 @@ def process_data():
 
         result = dataframe_check(fun_node, [], df_dict)
 
-        # Expected result should be None as there's no pandas library
         self.assertIsNone(result)
 
     def test_dataframe_chained_methods(self):
@@ -87,7 +82,6 @@ def process_data():
 
         result = dataframe_check(fun_node, self.libraries, df_dict)
 
-        # Expected result should include 'df', 'df2', and 'df3'
         self.assertIn('df', result)
         self.assertIn('df2', result)
         self.assertIn('df3', result)

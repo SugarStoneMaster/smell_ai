@@ -8,7 +8,6 @@ analyzer_path = "../../controller/analyzer.py"
 test_folder = "./test_cases/"
 output_folder = "./test/analyzer/incident_reports/"
 
-# Test case paths and expected outcomes
 test_cases = [
     # Test Case 1: Non contiene files python
     {"id": "TC_1",

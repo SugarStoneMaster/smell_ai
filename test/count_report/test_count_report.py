@@ -9,7 +9,6 @@ files_to_clean = ["project_overview.csv", "general_overview.csv"]
 output_folder = "./incident_reports/"
 
 
-# Test case paths and expected outcomes
 test_cases = [
     # TC_2.1: Correct overview_output.csv
     {"id": "TC_2.1", "csv_file": "overview_output_valid.csv", "expected": "Ausiliary charts generated"},
@@ -79,13 +78,10 @@ def main():
     execution_count = len(os.listdir(output_folder)) + 1
     incident_report_path = os.path.join(output_folder, f"incident_report_execution_{execution_count}.csv")
 
-    # Create a new file for this execution
     with open(incident_report_path, mode='w', newline='') as file:
         writer = csv.writer(file)
-        # Write header row
         writer.writerow(["Timestamp", "Test Case ID", "Outcome", "Message"])
 
-        # Run each test case and log the result
         for test_case in test_cases:
             run_test_case(test_case, writer)
 
