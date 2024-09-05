@@ -28,6 +28,9 @@ def pie_or_bar_chart(input_file="./general_overview.csv", is_pie=False):
     except pd.errors.ParserError:
         print("Error: The input file is not a valid CSV format.")
         sys.exit(1)
+    #except Exception:
+       # print("Error: The input file is not a valid CSV format.")
+       # sys.exit(1)
 
     # Ensure the file has the correct columns
     if 'name_smell' not in data.columns or 'smell' not in data.columns:
@@ -60,6 +63,8 @@ def pie_or_bar_chart(input_file="./general_overview.csv", is_pie=False):
 
         plt.tight_layout()
         plt.show()
+        print("Pie chart generated")
+        sys.exit(0)
     else:
         # Bar chart
         plt.figure(figsize=(14, 8))
@@ -70,17 +75,17 @@ def pie_or_bar_chart(input_file="./general_overview.csv", is_pie=False):
         plt.xticks(rotation=45, ha='right')
         plt.tight_layout()
         plt.show()
-
-
+        print("Bar chart generated")
+        sys.exit(0)
 def main():
     parser = argparse.ArgumentParser(
         description="Generate a chart (pie or bar) based on code smell data in a CSV file.")
-    parser.add_argument('--pie', action='store_true',
-                        help='Flag to generate a pie chart. Generates a bar chart if omitted.')
+    parser.add_argument('--input', type=str, default="./general_overview.csv", help='Path to the input CSV file.')
+    parser.add_argument('--pie', action='store_true', help='Flag to generate a pie chart. Generates a bar chart if omitted.')
 
     args = parser.parse_args()
 
-    pie_or_bar_chart(is_pie=args.pie)
+    pie_or_bar_chart(input_file=args.input, is_pie=args.pie)
 
 
 if __name__ == '__main__':

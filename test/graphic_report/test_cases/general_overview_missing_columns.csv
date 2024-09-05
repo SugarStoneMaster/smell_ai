@@ -1,0 +1,7 @@
+name_smell
+columns_and_datatype_not_explicitly_set
+dataframe_conversion_api_misused
+in_place_apis_misused
+matrix_multiplication_api_misused
+merge_api_parameter_not_explicitly_set
+tensor_array_not_used

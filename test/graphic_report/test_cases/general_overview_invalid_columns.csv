@@ -1,0 +1,7 @@
+name_smell,smell
+columns_and_datatype_not_explicitly_set,prova
+dataframe_conversion_api_misused,prova
+in_place_apis_misused,prova
+matrix_multiplication_api_misused,prova
+merge_api_parameter_not_explicitly_set,prova
+tensor_array_not_used,prova
